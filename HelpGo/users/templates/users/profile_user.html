@@ -1,0 +1,125 @@
+{% extends 'core/base.html'%}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+.texto-jumbi{
+    color: #ffffff !important;
+    font-size: 13px;
+}
+.texto-jumbi-title{
+    color: #ffffff !important;
+    font-size: 30px;
+}
+.btn-profile-continue{
+    background-color: #508de9;
+}
+.btn-profile-continue:hover{
+    background-color: #3f77ca;
+}
+.bg-jumbi-profile{
+    background-color: #f17657;
+    border-radius: 8px;
+}
+</style>
+
+<br> <br> <br> <br> <br>
+
+
+{% if user.user.age %}
+<div class="row" style="width:100%; position: absolute;z-index: 4; ">
+    <div class="col-4" style="width: 100%"></div>
+    <div class="col-4"  style="width: 100%;">
+    {% if user.user.image %}
+        <img class="mr-3 rounded-circle" src="{{user.user.image.url}}" style ="width:130px;" alt="Generic placeholder image">
+    {% else %}
+        <img class="mr-3 rounded-circle" src="{% static 'core/img/default-user.png'%}" style ="width:130px;" alt="Generic placeholder image">
+    {% endif %}
+        <h2>{{user.first_name}}</h2>
+        <a href="{% url 'Editar_Perfil' user.user.pk %}"  class='btn btn-profile-continue rounded-circle' style="position: absolute;bottom:50px;left: 110px; z-index: 2;width:50px;height: 50px;padding-left:10px;">
+            <span class="fa fa-cog fa-2x" style="margin-top:3px;color: #ffffff;"></span>            
+        </a>
+    </div>
+    <div class="col-4"  style="width: 100%"></div>
+</div>
+<br><br><br><br>
+<div class="row card-user rounded" style="padding : 10px;margin-left: 15px; margin-right : 15px;background-color: #ecf1f8;">
+    
+    <div class="media" style="width:100%;">
+        <div class="media-body" style="line-height: normal;">
+        <br><br><br><br><br>
+            <p ><i class="fa fa-user" style="padding-left: 10px;line-height: normal; margin-right: 15px;"></i>{{ user.user.age }}<span style="font-size: 10px;"> años</span></p>
+            <hr>            
+            <p><i class="fa fa-briefcase" style="padding-left: 10px;line-height: normal; margin-right: 10px;"></i>{{ user.user.area }}</p>
+            <p><i class="fa fa-smile-o" style="padding-left: 10px;line-height: normal; margin-right: 10px;"></i>{{ user.user.description}}</p>
+            <hr>
+            <p><i class="fa fa-envelope-o" style="padding-left: 10px;line-height: normal; margin-right: 10px;"></i>{{ user.email }}</p>
+            <p><i class="fa fa-phone" style="padding-left: 10px;line-height: normal; margin-right: 10px;"></i> En proceso...</p>
+            
+            <br>
+        </div>
+    </div>
+</div>
+ <br>
+<div class="row card-user rounded" style="padding : 10px;margin-left: 15px; margin-right : 15px;background-color: #ecf1f8;">
+    
+    <div class="media" style="width:100%;">
+        <div class="media-body" style="line-height: normal; text-align: center;">
+        <br>
+        <i class="fa fa-star fa-3x" style="color:#ecd671;"></i>
+        <i class="fa fa-star fa-3x" style="color:#ecd671;"></i>
+        <i class="fa fa-star fa-3x" style="color:#ecd671;"></i>
+        <i class="fa fa-star fa-3x"></i>
+        <i class="fa fa-star fa-3x"></i>
+        </div>
+    </div>
+
+    
+</div>
+<br>
+<div class="row card-user rounded" style="padding : 10px;margin-left: 15px; margin-right : 15px;background-color: #ecf1f8;">
+    
+    <div class="media" style="width:100%;">
+        <a href="{% url 'Lista_servicios' %}" class="btn btn-info btn-block">Servicios</a>
+    </div>
+
+    
+</div>
+
+     <br>
+{% else %}
+<span class="sm-content">
+
+    <div class="row">
+        <div class="jumbotron jumbotron-fluid bg-jumbi-profile" style="margin-left:10px;margin-right:10px;">
+        <div class="container">
+            <h1 class="texto-jumbi-title">Que tal {{ user.first_name }}!</h1>
+            <p class="texto-jumbi">Aun falta un par de pasos para completar el registro de tu cuenta.</p>
+        </div>
+    </div>
+    <a href="{% url 'Editar_Perfil' user.user.pk %}"  class='btn btn-profile-continue rounded-circle' style="position: absolute;bottom:1px;right: 20px; z-index: 2;width:60px;height: 60px;;">
+        <i class="fa fa-angle-right" style="margin-top:14px;"></i>            
+    </a>
+    </div>
+</span>
+
+{% endif %}
+
+
+
+<!-- Boton de Mensaje ********************************************-->
+
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-sm" style="border-radius:50%;position: fixed;width: 60px; height: 60px;padding: 13px;bottom: 10px; right: 10px; z-index: 4;">
+  <span class="fa fa-comments fa-w-24 fa-2x" style="color: #ffffff;"></span>
+  </a>
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-lg" style="border-radius:50%;position: fixed; width: 80px; height: 80px; padding: 15px; bottom: 15px; right: 15px; z-index: 4;">
+  <span class="fa fa-comments  fa-3x" style="color: #ffffff;"></span>
+  </a>
+
+
+
+{% endblock  %}

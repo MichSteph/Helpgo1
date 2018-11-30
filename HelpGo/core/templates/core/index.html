@@ -1,0 +1,33 @@
+{% extends 'core/base.html'%}
+
+{% load static %}
+
+{% block content %}
+<style>
+
+</style>
+<br> <br> <br> <br> <br>
+<h2>Bienvenido !</h2>
+
+<p >Busca a los profesionales que necesitas</p>
+
+
+<div class="jumbotron jumbotron-fluid color-jumbi rounded">
+  <div class="container">
+    <h1 class="display-6">Buscar Profesionales</h1>
+  </div>
+</div>
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-sm" style="border-radius:50%;position: fixed;width: 60px; height: 60px;padding: 13px;bottom: 10px; right: 10px; z-index: 4;">
+  <span class="fa fa-comments fa-w-24 fa-2x" style="color: #ffffff;"></span>
+  </a>
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-lg" style="border-radius:50%;position: fixed; width: 80px; height: 80px; padding: 15px; bottom: 15px; right: 15px; z-index: 4;">
+  <span class="fa fa-comments  fa-3x" style="color: #ffffff;"></span>
+  </a>
+
+
+
+
+
+{% endblock  %}

@@ -1,0 +1,215 @@
+{% extends 'core/base.html'%}
+
+{% load static %}
+
+{% block content %}
+<script>
+    $(document).ready(function(){
+        $("#form").hide();
+        $("#form-2").hide(); 
+    $("#Btn-Show-Log").click(function(){
+        $("#Btns").hide(200);
+        $("#form").show(500);
+    });
+
+    $("#Btn-lml").click(function(){
+        $("#Btns").show(500);
+        $("#form").hide(200);
+    });
+    $("#Btn-Show-Log-2").click(function(){
+        $("#Btns-2").hide(200);
+        $("#form-2").show(500);
+    });
+
+    $("#Btn-lml-2").click(function(){
+        $("#Btns-2").show(500);
+        $("#form-2").hide(200);
+    });
+});
+</script>
+
+<style>
+    .header{
+        display: none;
+    }
+    body{
+        
+        background-image:url(/static/core/img/handshake-7.jpeg);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+    input[type=text], input[type=password] {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+    label{
+        text-decoration: black;
+        color:#ffffff;
+    }
+    .btn-cool{
+
+        background-color: #cdf1b0;
+    }
+    .btn-cool:hover{
+
+        background-color: #54a0e7;
+    }
+    .btn-cool-back{
+
+        background-color: #ff7070;
+    }
+    .btn-cool-back:hover{
+
+        background-color: #e75454;
+    }
+    .btn-cool2{
+
+        background-color: #65e965;
+        -webkit-box-shadow: 0px 2px 9px 0px rgba(70, 107, 76, 0.479);
+    }
+    .btn-cool2:hover{
+
+        background-color: #4eda4e;
+    }
+    .btn-cool2:active > label{
+
+        visibility: hidden;
+    }
+    @media screen and (max-width: 400px) {
+        body{
+        
+        background: linear-gradient(to right, #4fe267, #42db5c);
+
+    }
+    }
+</style>
+
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+<!-- Vista para Pc ****************************************************** -->
+<span class="lg-content" >
+<div class="row">
+
+<div class="col-4" style="width:100%%;"></div>
+
+<div class="card-login col-4" >
+    <div style="text-align:center;">
+    <img src="{% static 'core/img/Logo_H.png' %}" alt="" style='margin-top:5px;border-radius:10px;max-width:150px;'>
+    </div>
+    <hr>
+
+    <div class="btns-log" style="z-index: 4;text-align: center;width: 100%;"  id='Btns'>
+        <br>
+
+        <button  class="btn btn-cool2" style="max-width:150px; height:50px;" id="Btn-Show-Log">
+            <span class="txt-content" style="color:#ffffff;">Iniciar Sesion</span>
+        </button>
+
+        <br><br>
+        <a href="{% url 'register' %}" class="btn btn-cool2" style="padding-top:12px;max-width:150px; height:50px;">
+            <span class="txt-content" style="color:#ffffff;">Crear Cuenta</span>
+        </a>
+
+
+    </div>
+    <br>
+
+    <div id="form">
+    <form class="" method="POST" action="{% url 'login' %}" style="text-align:center ;">
+        {% csrf_token %}
+
+        <label>Usuarios</label>
+        <br>
+        {{ form.username }}
+        <br>
+        <label>Contraseña</label>
+        <br>
+        {{ form.password }}
+        <br>
+        <br>
+        {{ form.errors }}
+
+        <button class="btn btn-cool-back rounded-circle" style="width:50px; height:50px;" id="Btn-lml">
+        <span class="fa fa-angle-left" style="color: #51d345;margin-right: 4px;"></span>
+        </button>
+
+        <button type="submit" class="btn btn-cool rounded-circle" style="width:70px; height:70px;margin-left: 10px;">
+        <span class="fa fa-check" style="color: #51d345;"></span>
+        </button>
+    <!--
+        <input type="submit" value="vvv" class="btn btn-cool fas fa-check">
+        -->
+    </form>
+    </div>
+</div>
+
+<div class="col-4"></div>
+
+</div>
+<br>
+</span>
+
+
+<!-- Vista para celular ****************************************************** -->
+<span class="sm-content">
+<div style="text-align:center;">
+<img src="{% static 'core/img/Logo_H.png' %}" alt="" style='max-width:150px;'>
+</div>
+<br><br><br>
+
+<div class="btns-log" style="z-index: 4;text-align: center;width: 100%;"  id='Btns-2'>
+    <br>
+
+    <button class="btn btn-cool2" style="max-width:100px; height:50px;" id="Btn-Show-Log-2">
+        <span class="txt-content" style="color:#ffffff;">Iniciar Sesion</span>
+    </button>
+
+    <br><br>
+    <a href="{% url 'register' %}"  class="btn btn-cool2" style="max-width:100px; height:50px;">
+        <span class="txt-content" style="color:#ffffff;">Crear Cuenta</span>
+    </a>
+
+
+</div>
+<br>
+
+<div id="form-2">
+  <form class="" method="POST" action="{% url 'login' %}" style="text-align:center ;">
+    {% csrf_token %}
+
+    <label>Usuario</label>
+    <br>
+    {{ form.username }}
+    <br>
+    <label>Contraseña</label>
+    <br>
+    {{ form.password }}
+    <br>
+    <br>
+    {{ form.errors }}
+
+    <button  class="btn btn-cool-back rounded-circle" style="width:50px; height:50px;" id="Btn-lml-2">
+      <span class="fa fa-angle-left" style="color: #51d345;margin-right: 4px;"></span>
+    </button>
+
+    <button type="submit" class="btn btn-cool rounded-circle" style="width:70px; height:70px;margin-left: 10px;">
+      <span class="fa fa-check" style="color: #51d345;"></span>
+    </button>
+  <!--
+    <input type="submit" value="vvv" class="btn btn-cool fas fa-check">
+    -->
+  </form>
+</div>
+</span>
+
+
+
+
+{% endblock  %}

@@ -1,0 +1,94 @@
+{% extends 'core/base.html'%}
+
+{% load static %}
+
+{% block content %}
+<script>
+    $(document).ready(function(){
+        $("#user-id").val('{{request.user.pk}}');
+                
+});
+</script>
+
+<style>
+    .btn-cool{
+
+        background-color: #82f166;
+    }
+    .btn-cool:hover{
+
+        background-color: #54a0e7;
+    }
+    .btn-cool-back{
+
+        background-color: #ff7070;
+    }
+    .btn-cool-back:hover{
+
+        background-color: #e75454;
+    }
+    input::placeholder {
+        color: rgb(154, 173, 157) !important;
+    }
+    .usuario_name{
+    opacity: 0;
+    display:none ; 
+    }
+</style>
+
+<br> <br> <br> <br> <br> <br> 
+
+
+
+<div id="form">
+  <form class="" method="POST"  enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+    <div style="margin-left: 20px;margin-right: 20px;" >
+            <div class='form-group'>
+                <input class='form-control usuario_name' type="text" placeholder="Usuario" name='user' id="user-id">
+            </div>
+    </div>
+
+    <div style="margin-left: 20px;margin-right: 20px;" >
+        <div class='form-group'>
+            <label  style="left:10px;">Servicio</label>
+            <input class='form-control' type="text" placeholder="Servicio" name='service' id="service-id">
+        </div>
+    </div>
+
+    <div style="margin-left: 20px;margin-right: 20px;" >
+        <div class='form-group'>
+            <label  style="left:10px;">Precio por hora</label>
+            <input class='form-control' type="text" placeholder="$" name='price' id="price-id">
+        </div>
+    </div>
+
+    {% if form.errors%}
+   {{ form.errors }}
+    {% endif %}
+
+
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-3">
+            <a href="{% url 'Perfil_Usuario' %}"  class="btn btn-cool-back rounded-circle" style="width:50px; height:50px; margin-top:11px;" id="Btn-lml">
+                <span class="fa fa-angle-left" style="color: #ffffff;margin-right: 4px;margin-top: 9px;"></span>
+            </a>
+        </div>
+        <div class="col-3">
+            <button type="submit" class="btn btn-cool rounded-circle" style="width:70px; height:70px;margin-left: 10px;" id="but_upload">
+                <span class="fa fa-check" style="color: #ffffff;"></span>
+            </button>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+  </form>
+</div>
+
+
+
+
+{% endblock  %}

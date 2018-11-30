@@ -1,0 +1,160 @@
+{% extends 'core/base.html'%} 
+
+{% load static %} 
+
+{% block content %}
+
+<br> <br> <br> <br> <br> 
+
+<!-- Vista para celular -->
+<span class="display-sm">
+
+    <div class="jumbotron jumbotron-fluid rounded">
+        <div class="container">
+            <h1 class="display-5">Pagar servicio</h1>
+            <hr>
+            <div class="alert alert-secondary" role="alert">
+            <b> Servicio :</b> {{ object.service }}
+            </div>
+            <div class="alert alert-warning" role="alert">
+            <b> Precio/hora :</b> {{ object.price }}
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Horas</label>
+                <select class="form-control" id="form_hours">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                </select>
+            </div>
+            <hr>
+            
+            <!--
+            <button id="myButton" class="float-left submit-button" >Home</button>
+            <a href="" class="btn btn-info rounded btn-block">
+                <span class="fa fa-paypal " style="color: #ffffff;"></span>
+            </a>
+            <script type="text/javascript">
+                document.getElementById("myButton").onclick = function () {
+                    var datas = document.getElementById("form_hours").value;
+                                                        //Aquí debe ir la variable datas
+                    var link = "{% url 'Actualizar_servicio' 1 %}"
+                    window.location.href = link;
+                    console.log(datas);
+                };
+            </script>
+            -->
+            
+            <!-- Boton de paypal -->
+            <div id="paypal-button-container" style="z-index: 4;"></div>
+                    <script src="{% static 'core/js/paypal.js'%}"></script>
+                    <script>
+                    var hours = document.getElementById("form_hours").value;
+                    var price = hours * {{object.price}};
+                    
+                    document.getElementById("form_hours").onclick = function () {
+                    var datas = document.getElementById("form_hours").value;
+                    hours = document.getElementById("form_hours").value;
+                    price = hours * {{object.price}};
+                    console.log(datas);
+                    };
+
+                    // Render the PayPal button
+                    paypal.Button.render({
+                    // Set your environment
+                    env: 'sandbox', // sandbox | production
+
+                    // Specify the style of the button
+                    style: {
+                    layout: 'vertical',  // horizontal | vertical
+                    size:   'medium',    // medium | large | responsive
+                    shape:  'rect',      // pill | rect
+                    color:  'blue'       // gold | blue | silver | white | black
+                    },
+
+                    // Specify allowed and disallowed funding sources
+                    //
+                    // Options:
+                    // - paypal.FUNDING.CARD
+                    // - paypal.FUNDING.CREDIT
+                    // - paypal.FUNDING.ELV
+                    funding: {
+                    allowed: [
+                        paypal.FUNDING.CARD,
+                        paypal.FUNDING.CREDIT
+                    ],
+                    disallowed: []
+                    },
+
+                    // Enable Pay Now checkout flow (optional)
+                    commit: true,
+
+                    // PayPal Client IDs - replace with your own
+                    // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+                    client: {
+                    sandbox: 'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+                    production: '<insert production client id>'
+                    },
+
+                    payment: function (data, actions) {
+                    return actions.payment.create({
+                        payment: {
+                        transactions: [
+                            {
+                            amount: {
+                                total: price,
+                                currency: 'MXN'
+                            }
+                            }
+                        ]
+                        }
+                    });
+                    },
+
+                    onAuthorize: function (data, actions) {
+                    return actions.payment.execute()
+                        .then(function () {
+                        window.alert('Payment Complete!');
+                        });
+                    }
+                    }, '#paypal-button-container');
+                    </script>
+                    <br>
+
+        </div>
+    </div>
+
+
+</span>
+
+<!-- Vista para escritorio -->
+<span class="display-lg">
+{% for t in services %}
+    {% if t.user.username == username  %}
+    <div class="alert alert-primary" role="alert">
+    {{ t.service }} | <b>{{ t.price }} / hora </b>
+    <a href="" class="btn btn-primary">Elegir</a>
+    </div>
+    {% endif %}
+{% empty %} 
+{% if request.GET.q %} No Personal Found {% else %} No hay servicios aún {% endif %} 
+
+{% endfor %}
+
+</span>
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-sm" style="border-radius:50%;position: fixed;width: 60px; height: 60px;padding: 13px;bottom: 10px; right: 10px; z-index: 4;">
+  <span class="fa fa-comments fa-w-24 fa-2x" style="color: #ffffff;"></span>
+  </a>
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-lg" style="border-radius:50%;position: fixed; width: 80px; height: 80px; padding: 15px; bottom: 15px; right: 15px; z-index: 4;">
+  <span class="fa fa-comments  fa-3x" style="color: #ffffff;"></span>
+  </a>
+
+{% endblock %}

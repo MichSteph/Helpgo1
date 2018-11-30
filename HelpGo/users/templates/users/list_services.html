@@ -1,0 +1,50 @@
+{% extends 'core/base.html'%} 
+
+{% load static %} 
+
+{% block content %}
+
+<br> <br> <br> <br> <br> 
+
+<!-- Vista para celular -->
+<span class="display-sm">
+{% for t in services %}
+    {% if t.user.username == username  %}
+    <div class="alert alert-primary" role="alert">
+    {{ t.service }} | <b>{{ t.price }} / hora </b>
+    <hr>
+    <a href="{% url 'Pagar_servicio' t.pk %}" class="btn btn-primary btn-block">Elegir</a>
+    </div>
+    {% endif %}
+{% empty %} 
+{% if request.GET.q %} No Personal Found {% else %} No hay servicios aún {% endif %} 
+
+{% endfor %}
+
+</span>
+
+<!-- Vista para escritorio -->
+<span class="display-lg">
+{% for t in services %}
+    {% if t.user.username == username  %}
+    <div class="alert alert-primary" role="alert">
+    {{ t.service }} | <b>{{ t.price }} / hora </b>
+    <a href="" class="btn btn-primary">Elegir</a>
+    </div>
+    {% endif %}
+{% empty %} 
+{% if request.GET.q %} No Personal Found {% else %} No hay servicios aún {% endif %} 
+
+{% endfor %}
+
+</span>
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-sm" style="border-radius:50%;position: fixed;width: 60px; height: 60px;padding: 13px;bottom: 10px; right: 10px; z-index: 4;">
+  <span class="fa fa-comments fa-w-24 fa-2x" style="color: #ffffff;"></span>
+  </a>
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-lg" style="border-radius:50%;position: fixed; width: 80px; height: 80px; padding: 15px; bottom: 15px; right: 15px; z-index: 4;">
+  <span class="fa fa-comments  fa-3x" style="color: #ffffff;"></span>
+  </a>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'core/base.html'%}
+
+{% load static %}
+
+{% block content %}
+
+
+<style>
+    .header{
+        display: none;
+    }
+    body{
+        background: linear-gradient(to right, #4fe267, #42db5c);
+    }
+    .btn-cool{
+
+        background-color: #cdf1b0;
+    }
+    .btn-cool:hover{
+
+        background-color: #54a0e7;
+    }
+    .btn-cool-back{
+
+        background-color: #ff7070;
+    }
+    .btn-cool-back:hover{
+
+        background-color: #e75454;
+    }
+    input::placeholder {
+        color: rgb(154, 173, 157) !important;
+    }
+</style>
+
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+
+
+<div id="form">
+  <form class="" method="POST" style="text-align:center ;">
+    {% csrf_token %}
+
+
+    <div style="margin-left: 20px;margin-right: 20px;" >
+        <div class='form-group'>
+            <input class='form-control' type="text" placeholder="Nombre" name='first_name'>
+        </div>
+    </div>
+    <div style="margin-left: 20px;margin-right: 20px;" >
+        <div class='form-group'>
+            <input class='form-control' type="text" placeholder="Apellidos" name='last_name'>
+        </div>
+    </div>
+    <div style="margin-left: 20px;margin-right: 20px;" >
+        <div class='form-group'>
+            <input class='form-control' type="text" placeholder="Usuario" name='username'>
+        </div>
+    </div>
+    <div style="margin-left: 20px;margin-right: 20px;" >
+        <div class='form-group'>
+            <input class='form-control' type="text" placeholder="Correo" name='email'>
+        </div>
+    </div>
+    <div style="margin-left: 20px;margin-right: 20px;" >
+        <div class='form-group'>
+            <input class='form-control' type="password" placeholder="Contraseña" name='password1'>
+        </div>
+    </div>
+    <div style="margin-left: 20px;margin-right: 20px;" >
+        <div class='form-group'>
+            <input class='form-control' type="password" placeholder="Confirmar contraseña" name='password2'>
+        </div>
+    </div>
+
+    {% if form.errors%}
+    <p>Error</p>
+    {% endif %}
+
+
+    <a href="{% url 'login' %}" class="btn btn-cool-back rounded-circle" style="width:50px; height:50px;" id="Btn-lml">
+      <span class="fa fa-angle-left" style="color: #51d345;margin-right: 4px;margin-top: 9px;"></span>
+    </a>
+
+    <button type="submit" class="btn btn-cool rounded-circle" style="width:70px; height:70px;margin-left: 10px;">
+      <span class="fa fa-check" style="color: #51d345;"></span>
+    </button>
+
+  </form>
+</div>
+
+
+
+
+{% endblock  %}

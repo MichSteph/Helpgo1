@@ -1,0 +1,84 @@
+{% extends 'core/base.html'%} 
+
+{% load static %} 
+
+{% block content %}
+
+<br> <br> <br> <br> <br> 
+
+<span class="display-sm" id="myTable">
+{% for t in object_list %}
+    {% if t.user.active == "no"  %}
+    {% else %}
+{% if t.user.image%}
+<img class="img-rounded-cool" src="{{ t.user.image.url }}" style="position: absolute; z-index: 2" alt="Generic placeholder image"> 
+{% else %}
+<img class="img-rounded-cool" src="{% static 'core/img/default-user.png' %}" style="position: absolute; z-index: 2" alt="Generic placeholder image"> 
+{% endif %}
+<br>
+<div class="row card-user rounded" style="padding : 10px;margin-left: 15px; margin-right : 15px;">
+
+    <div class="media" style="width:100%;">
+        <div class="media-body" style="line-height: normal;">
+            <p style="line-height: normal;"><span class="mt-0" style="padding-left: 80px; font-size: 22px;line-height: normal;">{{ t.first_name }}</span> ,<span style="font-size: 10px;">{{t.user.age}} años</span></p>
+            <p style="padding-left: 80px;">Correo : <span class="txt-content" style="line-height: normal;">{{ t.email }}</span></p>
+            <p style="padding-left: 80px;line-height: normal;">Area : <span class="txt-content">{{ t.user.area }}</span></p>
+            <br>
+
+        </div>
+    </div>
+    <a href="{% url 'Detalle_Usuario' t.pk %}" class="btn btn-ver-mas fa-2x " style="border-radius:100%;position: absolute;bottom:-20px;right: 20px; z-index: 2;width:60px;height: 60px;">
+            <i class="fa fa-eye"></i>
+            </a>
+</div>
+
+<br>
+    {% endif %}
+{% empty %} 
+{% if request.GET.q %} No Personal Found {% else %} No Personal Yet {% endif %} 
+
+{% endfor %}
+
+</span>
+
+<span class="display-lg">
+{% for t in object_list %}
+    {% if t.user.active == "no"  %}
+    {% else %}
+{% if t.user.image%}
+<img class="img-rounded-cool" src="{{ t.user.image.url }}" style="position: absolute; z-index: 2" alt="Generic placeholder image"> 
+{% else %}
+<img class="img-rounded-cool" src="{% static 'core/img/default-user.png' %}" style="position: absolute; z-index: 2" alt="Generic placeholder image"> 
+{% endif %}
+<br>
+<div class="row card-user rounded" style="padding : 10px;margin-left: 15px; margin-right : 15px;">
+
+    <div class="media">
+        <div class="media-body" style="line-height: normal;">
+            <p style="line-height: normal;"><span class="mt-0" style="padding-left: 80px; font-size: 22px;line-height: normal;">{{ t.first_name }}</span> ,<span style="font-size: 10px;">{{t.user.age}} años</span></p>
+            <p style="padding-left: 80px;">Correo : <span class="txt-content" style="line-height: normal;">{{ t.email }}</span></p>
+            <p style="padding-left: 80px;line-height: normal;">Area : <span class="txt-content">{{ t.user.area }}</span></p>
+            <br>
+            <a href="{% url 'Detalle_Usuario' t.pk %}" class="btn btn-ver-mas block" style="width : 120px;margin-left: 60px;margin-right: 30px;">Ver mas...</a>
+        </div>
+    </div>
+
+</div>
+<br>
+    {% endif %}
+{% empty %} 
+{% if request.GET.q %} No Personal Found {% else %} No Personal Yet {% endif %} 
+
+{% endfor %}
+
+</span>
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-sm" style="border-radius:50%;position: fixed;width: 60px; height: 60px;padding: 13px;bottom: 10px; right: 10px; z-index: 4;">
+  <span class="fa fa-comments fa-w-24 fa-2x" style="color: #ffffff;"></span>
+  </a>
+
+  <a href="{% url 'messenger:list_messages' %}" class="btn btn-message-red-lg" style="border-radius:50%;position: fixed; width: 80px; height: 80px; padding: 15px; bottom: 15px; right: 15px; z-index: 4;">
+  <span class="fa fa-comments  fa-3x" style="color: #ffffff;"></span>
+  </a>
+ 
+{% endblock %}
